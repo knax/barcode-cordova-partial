@@ -11,6 +11,7 @@ import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
 import com.asacreative.barcodescanner.Camera;
+import org.apache.cordova.PluginResult;
 
 public class Barcode extends CordovaPlugin {
     public static final String TAG = "Barcode";
@@ -19,6 +20,7 @@ public class Barcode extends CordovaPlugin {
     final String initializeCameraMethod = "initializeCamera";
     final String releaseCameraMethod = "releaseCamera";
     final String setViewfinderDimensionMethod = "setViewfinderDimension";
+    final String getCameraObjectMethod = "getCameraObject";
 
 
     private Camera camera = null;
@@ -50,7 +52,12 @@ public class Barcode extends CordovaPlugin {
             return this.initializeCamera(args, callbackContext);
         } else if (releaseCameraMethod.equals(action)) {
             return this.releaseCamera(args, callbackContext);
+        } else if (setViewfinderDimensionMethod.equals(action)) {
+            return this.setViewfinderDimension(args, callbackContext);
+        } else if (getCameraObjectMethod.equals(action)) {
+            return this.getCameraObject(args, callbackContext);
         }
+
 
         return false;
     }
@@ -72,23 +79,62 @@ public class Barcode extends CordovaPlugin {
     public boolean initializeCamera(JSONArray args, CallbackContext callbackContext) throws JSONException {
         Log.v(TAG, "Initialize Camera Method on barcode");
 
-        this.camera = new Camera();
+        if (this.camera == null) {
+            this.camera = new Camera();
+
+            callbackContext.sendPluginResult(new PluginResult(PluginResult.Status.OK, "Camera initialized"));
+
+            return true;
+        }
+
+        callbackContext.sendPluginResult(new PluginResult(PluginResult.Status.ERROR, "Camera already initialized"));
 
         return true;
+
     }
 
     public boolean releaseCamera(JSONArray args, CallbackContext callbackContext) throws JSONException {
         Log.v(TAG, "Release Camera Method on barcode");
 
-        this.camera.release();
+        if (camera != null) {
+            this.camera.release();
 
-        this.camera = null;
+            this.camera = null;
+
+            callbackContext.sendPluginResult(new PluginResult(PluginResult.Status.OK, "Camera successfully released"));
+
+            return true;
+        }
+
+        callbackContext.sendPluginResult(new PluginResult(PluginResult.Status.ERROR, "Camera must be initialized first"));
 
         return true;
     }
 
     public boolean setViewfinderDimension(JSONArray args, CallbackContext callbackContext) throws JSONException {
-        this.camera.setDimension(args.getInt(0),args.getInt(1),args.getInt(2),args.getInt(3));
+
+        if(this.camera == null) {
+            callbackContext.sendPluginResult(new PluginResult(PluginResult.Status.ERROR, "Camera must be initialized first"));
+
+            return true;
+        }
+
+        this.camera.setDimension(args.getInt(0), args.getInt(1), args.getInt(2), args.getInt(3));
+
+        callbackContext.sendPluginResult(new PluginResult(PluginResult.Status.OK, "Viewfinder dimension successfully set"));
+
+        return true;
+    }
+
+    public boolean getCameraObject(JSONArray args, CallbackContext callbackContext) throws JSONException {
+
+        if(this.camera == null) {
+            callbackContext.sendPluginResult(new PluginResult(PluginResult.Status.ERROR, "Camera must be initialized first"));
+
+            return true;
+        }
+
+        callbackContext.sendPluginResult(new PluginResult(PluginResult.Status.OK, "Camera object " + this.camera.toString()));
 
         return true;
     }

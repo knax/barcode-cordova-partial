@@ -23,6 +23,57 @@
         });
     };
 
+    Barcode.prototype.releaseCamera = function () {
+        return new Promise(function (resolve, reject) {
+            console.log("Barcode.js: release camera");
+            exec(function (result) {
+                resolve(result);
+            }, function (error) {
+                reject(error);
+            }, "Barcode", "releaseCamera", []);
+        })
+    };
+
+    Barcode.prototype.releaseCamera = function () {
+        return new Promise(function (resolve, reject) {
+            console.log("Barcode.js: release camera");
+            exec(function (result) {
+                resolve(result);
+            }, function (error) {
+                reject(error);
+            }, "Barcode", "releaseCamera", []);
+        })
+    };
+
+    Barcode.prototype.setViewfinderDimension = function (dimension) {
+        dimension = dimension || {};
+        dimension.x = dimension.x || 0;
+        dimension.y = dimension.y || 0;
+        dimension.width = dimension.width || 0;
+        dimension.height = dimension.height || 0;
+
+        return new Promise(function (resolve, reject) {
+            console.log("Barcode.js: set viewfinder");
+            exec(function (result) {
+                resolve(result);
+            }, function (error) {
+                reject(error);
+            }, "Barcode", "setViewfinderDimension", [dimension.x, dimension.y, dimension.width, dimension.height]);
+        })
+    };
+
+    Barcode.prototype.getCameraObject = function () {
+        return new Promise(function (resolve, reject) {
+            console.log("Barcode.js: get camera object");
+            exec(function (result) {
+                resolve(result);
+            }, function (error) {
+                reject(error);
+            }, "Barcode", "getCameraObject", []);
+        })
+    };
+
+
     Barcode.prototype.execute = function (name, argumentArray) {
         return new Promise(function (resolve, reject) {
             console.log("Barcode.js: executing " + name + " with argument " + argumentArray);
@@ -33,7 +84,6 @@
             }, "Barcode", name, argumentArray);
         });
     };
-
 
 
     module.exports = new Barcode();

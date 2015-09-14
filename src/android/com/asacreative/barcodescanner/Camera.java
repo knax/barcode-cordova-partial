@@ -35,9 +35,14 @@ public class Camera {
     }
 
     public void release() {
-        Log.v(TAG, "Set Dimension" + x + y + width + height);
+        Log.v(TAG, "Release");
 
         return;
     }
+
+    public String toString() {
+        return String.format("Camera Viewfinder with x:%d, y:%d, width:%d, height:%d", this.x, this.y, this.width, this.height);
+    }
+
 
 }
