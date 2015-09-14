@@ -1,0 +1,17 @@
+{
+  "version": "0.1",
+  "name": "com.asacreative.barcodescanner",
+  "cordova_name": "Barcode Scanner",
+  "description": "Barcode Scanner",
+  "license": "Apache 2.0",
+  "repo": "",
+  "issue": "",
+  "keywords": [
+    "barcode"
+  ],
+  "platforms": [
+    "android",
+  ],
+  "engines": [],
+  "englishdoc": ""
+}
