@@ -10,6 +10,8 @@ public class Camera {
     private int width;
     private int height;
 
+    public boolean isCameraStarted = false;
+
     public Camera(int x, int y, int width, int height) {
         Log.v(TAG, "Constructor");
 
@@ -20,7 +22,7 @@ public class Camera {
     }
 
     public Camera() {
-        Log.v(TAG, "Constructor");
+        this(0,0,0,0);
     }
 
     public void setDimension(int x, int y, int width, int height) {
@@ -30,6 +32,20 @@ public class Camera {
         this.y = y;
         this.width = width;
         this.height = height;
+
+        return;
+    }
+
+    public void startPreview() {
+
+        this.isCameraStarted = true;
+
+        return;
+    }
+
+    public void stopPreview() {
+
+        this.isCameraStarted = false;
 
         return;
     }

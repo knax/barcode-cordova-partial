@@ -34,17 +34,6 @@
         })
     };
 
-    Barcode.prototype.releaseCamera = function () {
-        return new Promise(function (resolve, reject) {
-            console.log("Barcode.js: release camera");
-            exec(function (result) {
-                resolve(result);
-            }, function (error) {
-                reject(error);
-            }, "Barcode", "releaseCamera", []);
-        })
-    };
-
     Barcode.prototype.setViewfinderDimension = function (dimension) {
         dimension = dimension || {};
         dimension.x = dimension.x || 0;
@@ -60,6 +49,17 @@
                 reject(error);
             }, "Barcode", "setViewfinderDimension", [dimension.x, dimension.y, dimension.width, dimension.height]);
         })
+    };
+
+    Barcode.prototype.startCamera = function () {
+        return new Promise(function (resolve, reject) {
+            console.log("Barcode.js: initialize Camera");
+            exec(function (result) {
+                resolve(result);
+            }, function (error) {
+                reject(error);
+            }, "Barcode", "startCamera", []);
+        });
     };
 
     Barcode.prototype.getCameraObject = function () {
