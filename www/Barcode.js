@@ -53,12 +53,23 @@
 
     Barcode.prototype.startCamera = function () {
         return new Promise(function (resolve, reject) {
-            console.log("Barcode.js: initialize Camera");
+            console.log("Barcode.js: start Camera");
             exec(function (result) {
                 resolve(result);
             }, function (error) {
                 reject(error);
             }, "Barcode", "startCamera", []);
+        });
+    };
+
+    Barcode.prototype.stopCamera = function () {
+        return new Promise(function (resolve, reject) {
+            console.log("Barcode.js: stop Camera");
+            exec(function (result) {
+                resolve(result);
+            }, function (error) {
+                reject(error);
+            }, "Barcode", "stopCamera", []);
         });
     };
 

@@ -22,6 +22,7 @@ public class Barcode extends CordovaPlugin {
     final String setViewfinderDimensionMethod = "setViewfinderDimension";
     final String getCameraObjectMethod = "getCameraObject";
     final String startCameraMethod = "startCamera";
+    final String stopCameraMethod = "stopCamera";
 
 
     private Camera camera = null;
@@ -57,6 +58,10 @@ public class Barcode extends CordovaPlugin {
             return this.setViewfinderDimension(args, callbackContext);
         } else if (getCameraObjectMethod.equals(action)) {
             return this.getCameraObject(args, callbackContext);
+        } else if (startCameraMethod.equals(action)) {
+            return this.startCamera(args, callbackContext);
+        } else if (stopCameraMethod.equals(action)) {
+            return this.stopCamera(args, callbackContext);
         }
 
 
@@ -81,7 +86,7 @@ public class Barcode extends CordovaPlugin {
         Log.v(TAG, "Initialize Camera Method on barcode");
 
         if (this.camera == null) {
-            this.camera = new Camera();
+            this.camera = new Camera(this.cordova, this.webView);
 
             callbackContext.sendPluginResult(new PluginResult(PluginResult.Status.OK, "Camera initialized"));
 
@@ -114,7 +119,7 @@ public class Barcode extends CordovaPlugin {
 
     public boolean setViewfinderDimension(JSONArray args, CallbackContext callbackContext) throws JSONException {
 
-        if(this.camera == null) {
+        if (this.camera == null) {
             callbackContext.sendPluginResult(new PluginResult(PluginResult.Status.ERROR, "Camera must be initialized first"));
 
             return true;
@@ -129,13 +134,13 @@ public class Barcode extends CordovaPlugin {
 
     public boolean startCamera(JSONArray args, CallbackContext callbackContext) throws JSONException {
 
-        if(this.camera == null) {
+        if (this.camera == null) {
             callbackContext.sendPluginResult(new PluginResult(PluginResult.Status.ERROR, "Camera must be initialized first"));
 
             return true;
         }
 
-        if(this.camera.isCameraStarted) {
+        if (this.camera.isCameraStarted) {
             callbackContext.sendPluginResult(new PluginResult(PluginResult.Status.ERROR, "Camera already started"));
 
             return true;
@@ -150,13 +155,13 @@ public class Barcode extends CordovaPlugin {
 
     public boolean stopCamera(JSONArray args, CallbackContext callbackContext) throws JSONException {
 
-        if(this.camera == null) {
+        if (this.camera == null) {
             callbackContext.sendPluginResult(new PluginResult(PluginResult.Status.ERROR, "Camera must be initialized first"));
 
             return true;
         }
 
-        if(!this.camera.isCameraStarted) {
+        if (!this.camera.isCameraStarted) {
             callbackContext.sendPluginResult(new PluginResult(PluginResult.Status.ERROR, "Camera is not started"));
 
             return true;
@@ -172,7 +177,7 @@ public class Barcode extends CordovaPlugin {
 
     public boolean getCameraObject(JSONArray args, CallbackContext callbackContext) throws JSONException {
 
-        if(this.camera == null) {
+        if (this.camera == null) {
             callbackContext.sendPluginResult(new PluginResult(PluginResult.Status.ERROR, "Camera must be initialized first"));
 
             return true;
