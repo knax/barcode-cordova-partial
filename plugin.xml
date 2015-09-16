@@ -26,12 +26,17 @@
         </config-file>
         <!--<source-file src="src/android/Barcode.java" target-dir="src/" />-->
 
+        <source-file src="src/android/com/google/zxing/client/android/camera/open/OpenCameraInterface.java"
+                     target-dir="src/com/asacreative/barcodescanner"/>
+
+
         <source-file src="src/android/com/asacreative/barcodescanner/Barcode.java"
                      target-dir="src/com/asacreative/barcodescanner"/>
         <source-file src="src/android/com/asacreative/barcodescanner/Camera.java"
                      target-dir="src/com/asacreative/barcodescanner"/>
         <source-file src="src/android/com/asacreative/barcodescanner/CameraViewfinderFragment.java"
                      target-dir="src/com/asacreative/barcodescanner"/>
+        <source-file src="res/layout/activity_camera.xml" target-dir="res/layout"/>
         <!--<source-file src="src/android/com/mbppower/CameraActivity.java" target-dir="src/com/mbppower"/>-->
         <!--<source-file src="src/android/com/mbppower/camera_activity.xml" target-dir="res/layout"/>-->
         <!--<source-file src="src/android/com/mbppower/camera_theme.xml" target-dir="res/values"/>-->

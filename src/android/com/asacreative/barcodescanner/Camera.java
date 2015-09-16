@@ -1,16 +1,25 @@
 package com.asacreative.barcodescanner;
 
+import android.annotation.TargetApi;
+import android.app.Fragment;
+import android.app.FragmentManager;
+import android.app.FragmentTransaction;
+import android.content.Context;
+import android.content.Intent;
 import android.graphics.Color;
+import android.os.Build;
+import android.util.DisplayMetrics;
 import android.util.Log;
+import android.util.TypedValue;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.FrameLayout;
-import android.widget.TextView;
 import org.apache.cordova.CordovaInterface;
 import org.apache.cordova.CordovaWebView;
 
 public class Camera {
     public static final String TAG = "BarcodeCamera";
+    private final CordovaInterface cordova;
 
     private int x;
     private int y;
@@ -19,70 +28,89 @@ public class Camera {
 
     public boolean isCameraStarted = false;
 
-    private CordovaInterface cordova;
-    private CordovaWebView webView;
-
     private int textViewId = 111;
+    private int containerViewId = 1;
+    private CameraViewfinderFragment cameraFragment;
 
-    public Camera(CordovaInterface cordova, CordovaWebView webView, int x, int y, int width, int height) {
+    public Camera(CordovaInterface cordova, int x, int y, int width, int height) {
         Log.v(TAG, "Constructor");
 
-        this.x = x;
-        this.y = y;
-        this.width = width;
-        this.height = height;
-
         this.cordova = cordova;
-        this.webView = webView;
+        this.setDimension(x, y, width, height);
 
     }
 
-    public Camera(CordovaInterface cordova, CordovaWebView webView) {
-        this(cordova, webView, 0, 0, 0, 0);
+    public Camera(CordovaInterface cordova) {
+        this(cordova, 0, 0, 0, 0);
     }
 
     public void setDimension(int x, int y, int width, int height) {
         Log.v(TAG, "Set Dimension" + x + y + width + height);
 
-        this.x = x;
-        this.y = y;
-        this.width = width;
-        this.height = height;
+        DisplayMetrics metrics = cordova.getActivity().getResources().getDisplayMetrics();
+
+        this.x = (int) TypedValue.applyDimension(TypedValue.COMPLEX_UNIT_DIP, x, metrics);
+        this.y = (int) TypedValue.applyDimension(TypedValue.COMPLEX_UNIT_DIP, y, metrics);
+        this.width = (int) TypedValue.applyDimension(TypedValue.COMPLEX_UNIT_DIP, width, metrics);
+        this.height = (int) TypedValue.applyDimension(TypedValue.COMPLEX_UNIT_DIP, height, metrics);
 
     }
 
     public void startPreview() {
+        Log.v(TAG, "On start preview");
+        if (cameraFragment != null) {
+            return;
+        }
+        cameraFragment = new CameraViewfinderFragment();
 
-        Runnable runnable = new Runnable() {
+        cameraFragment.setDimension(x,y,width,height);
+
+        cordova.getActivity().runOnUiThread(new Runnable() {
+            @TargetApi(Build.VERSION_CODES.HONEYCOMB)
+            @Override
             public void run() {
-                FrameLayout layout = (FrameLayout) webView.getView().getParent();
 
-                TextView textView = new TextView(layout.getContext());
-                textView.setBackgroundColor(Color.BLUE);
-                FrameLayout.LayoutParams params = new FrameLayout.LayoutParams(width, height);
-                params.setMargins(x, y, 0, 0);
-                textView.setLayoutParams(params);
-                textView.setId(textViewId);
-                textView.setText("Hello World");
-                layout.addView(textView);
+                try {
+
+                    //create or update the layout params for the container view
+                    FrameLayout containerView = (FrameLayout) cordova.getActivity().findViewById(containerViewId);
+                    if (containerView == null) {
+                        containerView = new FrameLayout(cordova.getActivity().getApplicationContext());
+                        containerView.setId(containerViewId);
+
+                        FrameLayout.LayoutParams containerLayoutParams = new FrameLayout.LayoutParams(FrameLayout.LayoutParams.MATCH_PARENT, FrameLayout.LayoutParams.MATCH_PARENT);
+                        cordova.getActivity().addContentView(containerView, containerLayoutParams);
+                    }
+
+
+                    containerView.bringToFront();
+
+                    //add the fragment to the container
+                    FragmentManager fragmentManager = cordova.getActivity().getFragmentManager();
+                    FragmentTransaction fragmentTransaction = fragmentManager.beginTransaction();
+                    fragmentTransaction.add(containerView.getId(), cameraFragment);
+                    fragmentTransaction.commit();
+                } catch (Exception e) {
+                    e.printStackTrace();
+                }
             }
-        };
-        this.cordova.getActivity().runOnUiThread(runnable);
+        });
+
         this.isCameraStarted = true;
 
     }
 
+    @TargetApi(Build.VERSION_CODES.HONEYCOMB)
     public void stopPreview() {
-        Runnable runnable = new Runnable() {
-            public void run() {
-                FrameLayout layout = (FrameLayout) webView.getView().getParent();
+        if (cameraFragment == null) {
+            return;
+        }
 
-                View textView = layout.findViewById(textViewId);
-
-                ((ViewGroup) textView.getParent()).removeView(textView);
-            }
-        };
-        this.cordova.getActivity().runOnUiThread(runnable);
+        FragmentManager fragmentManager = cordova.getActivity().getFragmentManager();
+        FragmentTransaction fragmentTransaction = fragmentManager.beginTransaction();
+        fragmentTransaction.remove(cameraFragment);
+        fragmentTransaction.commit();
+        cameraFragment = null;
 
         this.isCameraStarted = false;
     }

@@ -86,7 +86,7 @@ public class Barcode extends CordovaPlugin {
         Log.v(TAG, "Initialize Camera Method on barcode");
 
         if (this.camera == null) {
-            this.camera = new Camera(this.cordova, this.webView);
+            this.camera = new Camera(this.cordova);
 
             callbackContext.sendPluginResult(new PluginResult(PluginResult.Status.OK, "Camera initialized"));
 
