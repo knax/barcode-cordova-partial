@@ -24,21 +24,192 @@
                 <param name="onload" value="true"/>
             </feature>
         </config-file>
-        <!--<source-file src="src/android/Barcode.java" target-dir="src/" />-->
 
-        <source-file src="src/android/com/google/zxing/client/android/camera/open/OpenCameraInterface.java"
-                     target-dir="src/com/asacreative/barcodescanner"/>
+        <source-file src="libs/core-3.2.1.jar" target-dir="libs"/>
+        <source-file src="libs/android-support-v4.jar" target-dir="libs"/>
 
-
+        <!--java part-->
         <source-file src="src/android/com/asacreative/barcodescanner/Barcode.java"
                      target-dir="src/com/asacreative/barcodescanner"/>
         <source-file src="src/android/com/asacreative/barcodescanner/Camera.java"
                      target-dir="src/com/asacreative/barcodescanner"/>
         <source-file src="src/android/com/asacreative/barcodescanner/CameraViewfinderFragment.java"
                      target-dir="src/com/asacreative/barcodescanner"/>
-        <source-file src="res/layout/activity_camera.xml" target-dir="res/layout"/>
-        <!--<source-file src="src/android/com/mbppower/CameraActivity.java" target-dir="src/com/mbppower"/>-->
-        <!--<source-file src="src/android/com/mbppower/camera_activity.xml" target-dir="res/layout"/>-->
-        <!--<source-file src="src/android/com/mbppower/camera_theme.xml" target-dir="res/values"/>-->
+        <source-file src="src/android/com/google/zxing/client/android/AmbientLightManager.java"
+                     target-dir="src/com/google/zxing/client/android"/>
+        <source-file src="src/android/com/google/zxing/client/android/BeepManager.java"
+                     target-dir="src/com/google/zxing/client/android"/>
+        <source-file src="src/android/com/google/zxing/client/android/DecodeFormatManager.java"
+                     target-dir="src/com/google/zxing/client/android"/>
+        <source-file src="src/android/com/google/zxing/client/android/DecodeHintManager.java"
+                     target-dir="src/com/google/zxing/client/android"/>
+        <source-file src="src/android/com/google/zxing/client/android/InactivityTimer.java"
+                     target-dir="src/com/google/zxing/client/android"/>
+        <source-file src="src/android/com/google/zxing/client/android/Intents.java"
+                     target-dir="src/com/google/zxing/client/android"/>
+        <source-file src="src/android/com/google/zxing/client/android/R.java"
+                     target-dir="src/com/google/zxing/client/android"/>
+        <source-file src="src/android/com/google/zxing/client/android/camera/CameraConfigurationUtils.java"
+                     target-dir="src/com/google/zxing/client/android/camera"/>
+        <source-file src="src/android/com/google/zxing/client/android/camera/open/OpenCameraInterface.java"
+                     target-dir="src/com/google/zxing/client/android/camera/open"/>
+        <source-file src="src/android/com/google/zxing/integration/android/IntentIntegrator.java"
+                     target-dir="src/com/google/zxing/integration/android"/>
+        <source-file src="src/android/com/google/zxing/integration/android/IntentResult.java"
+                     target-dir="src/com/google/zxing/integration/android"/>
+        <source-file src="src/android/com/journeyapps/barcodescanner/BarcodeCallback.java"
+                     target-dir="src/com/journeyapps/barcodescanner"/>
+        <source-file src="src/android/com/journeyapps/barcodescanner/BarcodeEncoder.java"
+                     target-dir="src/com/journeyapps/barcodescanner"/>
+        <source-file src="src/android/com/journeyapps/barcodescanner/BarcodeResult.java"
+                     target-dir="src/com/journeyapps/barcodescanner"/>
+        <source-file src="src/android/com/journeyapps/barcodescanner/BarcodeView.java"
+                     target-dir="src/com/journeyapps/barcodescanner"/>
+        <source-file src="src/android/com/journeyapps/barcodescanner/CameraPreview.java"
+                     target-dir="src/com/journeyapps/barcodescanner"/>
+        <source-file src="src/android/com/journeyapps/barcodescanner/CaptureActivity.java"
+                     target-dir="src/com/journeyapps/barcodescanner"/>
+        <source-file src="src/android/com/journeyapps/barcodescanner/CaptureManager.java"
+                     target-dir="src/com/journeyapps/barcodescanner"/>
+        <source-file src="src/android/com/journeyapps/barcodescanner/CompoundBarcodeView.java"
+                     target-dir="src/com/journeyapps/barcodescanner"/>
+        <source-file src="src/android/com/journeyapps/barcodescanner/Decoder.java"
+                     target-dir="src/com/journeyapps/barcodescanner"/>
+        <source-file src="src/android/com/journeyapps/barcodescanner/DecoderFactory.java"
+                     target-dir="src/com/journeyapps/barcodescanner"/>
+        <source-file src="src/android/com/journeyapps/barcodescanner/DecoderResultPointCallback.java"
+                     target-dir="src/com/journeyapps/barcodescanner"/>
+        <source-file src="src/android/com/journeyapps/barcodescanner/DecoderThread.java"
+                     target-dir="src/com/journeyapps/barcodescanner"/>
+        <source-file src="src/android/com/journeyapps/barcodescanner/DefaultDecoderFactory.java"
+                     target-dir="src/com/journeyapps/barcodescanner"/>
+        <source-file src="src/android/com/journeyapps/barcodescanner/RotationCallback.java"
+                     target-dir="src/com/journeyapps/barcodescanner"/>
+        <source-file src="src/android/com/journeyapps/barcodescanner/RotationListener.java"
+                     target-dir="src/com/journeyapps/barcodescanner"/>
+        <source-file src="src/android/com/journeyapps/barcodescanner/Size.java"
+                     target-dir="src/com/journeyapps/barcodescanner"/>
+        <source-file src="src/android/com/journeyapps/barcodescanner/SourceData.java"
+                     target-dir="src/com/journeyapps/barcodescanner"/>
+        <source-file src="src/android/com/journeyapps/barcodescanner/Util.java"
+                     target-dir="src/com/journeyapps/barcodescanner"/>
+        <source-file src="src/android/com/journeyapps/barcodescanner/ViewfinderView.java"
+                     target-dir="src/com/journeyapps/barcodescanner"/>
+        <source-file src="src/android/com/journeyapps/barcodescanner/camera/AutoFocusManager.java"
+                     target-dir="src/com/journeyapps/barcodescanner/camera"/>
+        <source-file src="src/android/com/journeyapps/barcodescanner/camera/CameraInstance.java"
+                     target-dir="src/com/journeyapps/barcodescanner/camera"/>
+        <source-file src="src/android/com/journeyapps/barcodescanner/camera/CameraManager.java"
+                     target-dir="src/com/journeyapps/barcodescanner/camera"/>
+        <source-file src="src/android/com/journeyapps/barcodescanner/camera/CameraSettings.java"
+                     target-dir="src/com/journeyapps/barcodescanner/camera"/>
+        <source-file src="src/android/com/journeyapps/barcodescanner/camera/CameraThread.java"
+                     target-dir="src/com/journeyapps/barcodescanner/camera"/>
+        <source-file src="src/android/com/journeyapps/barcodescanner/camera/DisplayConfiguration.java"
+                     target-dir="src/com/journeyapps/barcodescanner/camera"/>
+        <source-file src="src/android/com/journeyapps/barcodescanner/camera/PreviewCallback.java"
+                     target-dir="src/com/journeyapps/barcodescanner/camera"/>
+
+
+
+        <!--xml layout part-->
+        <source-file src="res/drawable-hdpi/icon.png"
+                     target-dir="res/drawable-hdpi"/>
+        <source-file src="res/drawable-hdpi-v4/icon.png"
+                     target-dir="res/drawable-hdpi-v4"/>
+        <source-file src="res/drawable-mdpi/icon.png"
+                     target-dir="res/drawable-mdpi"/>
+        <source-file src="res/drawable-mdpi-v4/icon.png"
+                     target-dir="res/drawable-mdpi-v4"/>
+        <source-file src="res/drawable-xhdpi/icon.png"
+                     target-dir="res/drawable-xhdpi"/>
+        <source-file src="res/drawable-xhdpi-v4/icon.png"
+                     target-dir="res/drawable-xhdpi-v4"/>
+        <source-file src="res/drawable-xxhdpi/icon.png"
+                     target-dir="res/drawable-xxhdpi"/>
+        <source-file src="res/drawable-xxhdpi-v4/icon.png"
+                     target-dir="res/drawable-xxhdpi-v4"/>
+        <source-file src="res/layout/activity_camera.xml"
+                     target-dir="res/layout"/>
+        <source-file src="res/layout/zxing_barcode_scanner.xml"
+                     target-dir="res/layout"/>
+        <source-file src="res/layout/zxing_capture.xml"
+                     target-dir="res/layout"/>
+        <source-file src="res/values/zxing_attrs.xml"
+                     target-dir="res/values"/>
+        <source-file src="res/values/zxing_colors.xml"
+                     target-dir="res/values"/>
+        <source-file src="res/values/zxing_ids.xml"
+                     target-dir="res/values"/>
+        <source-file src="res/values/zxing_strings.xml"
+                     target-dir="res/values"/>
+        <source-file src="res/values/zxing_themes.xml"
+                     target-dir="res/values"/>
+        <source-file src="res/values-ar/zxing_strings.xml"
+                     target-dir="res/values-ar"/>
+        <source-file src="res/values-bg/zxing_strings.xml"
+                     target-dir="res/values-bg"/>
+        <source-file src="res/values-ca/zxing_strings.xml"
+                     target-dir="res/values-ca"/>
+        <source-file src="res/values-cs/zxing_strings.xml"
+                     target-dir="res/values-cs"/>
+        <source-file src="res/values-da/zxing_strings.xml"
+                     target-dir="res/values-da"/>
+        <source-file src="res/values-de/zxing_strings.xml"
+                     target-dir="res/values-de"/>
+        <source-file src="res/values-el/zxing_strings.xml"
+                     target-dir="res/values-el"/>
+        <source-file src="res/values-es/zxing_strings.xml"
+                     target-dir="res/values-es"/>
+        <source-file src="res/values-eu/zxing_strings.xml"
+                     target-dir="res/values-eu"/>
+        <source-file src="res/values-fi/zxing_strings.xml"
+                     target-dir="res/values-fi"/>
+        <source-file src="res/values-fr/zxing_strings.xml"
+                     target-dir="res/values-fr"/>
+        <source-file src="res/values-he/zxing_strings.xml"
+                     target-dir="res/values-he"/>
+        <source-file src="res/values-hi/zxing_strings.xml"
+                     target-dir="res/values-hi"/>
+        <source-file src="res/values-hu/zxing_strings.xml"
+                     target-dir="res/values-hu"/>
+        <source-file src="res/values-id/zxing_strings.xml"
+                     target-dir="res/values-id"/>
+        <source-file src="res/values-it/zxing_strings.xml"
+                     target-dir="res/values-it"/>
+        <source-file src="res/values-ja/zxing_strings.xml"
+                     target-dir="res/values-ja"/>
+        <source-file src="res/values-ko/zxing_strings.xml"
+                     target-dir="res/values-ko"/>
+        <source-file src="res/values-nl/zxing_strings.xml"
+                     target-dir="res/values-nl"/>
+        <source-file src="res/values-pl/zxing_strings.xml"
+                     target-dir="res/values-pl"/>
+        <source-file src="res/values-pt/zxing_strings.xml"
+                     target-dir="res/values-pt"/>
+        <source-file src="res/values-ro/zxing_strings.xml"
+                     target-dir="res/values-ro"/>
+        <source-file src="res/values-ru/zxing_strings.xml"
+                     target-dir="res/values-ru"/>
+        <source-file src="res/values-sk/zxing_strings.xml"
+                     target-dir="res/values-sk"/>
+        <source-file src="res/values-sl/zxing_strings.xml"
+                     target-dir="res/values-sl"/>
+        <source-file src="res/values-sv/zxing_strings.xml"
+                     target-dir="res/values-sv"/>
+        <source-file src="res/values-th/zxing_strings.xml"
+                     target-dir="res/values-th"/>
+        <source-file src="res/values-tr/zxing_strings.xml"
+                     target-dir="res/values-tr"/>
+        <source-file src="res/values-uk/zxing_strings.xml"
+                     target-dir="res/values-uk"/>
+        <source-file src="res/values-v11/zxing_themes.xml"
+                     target-dir="res/values-v11"/>
+        <source-file src="res/values-zh-rCN/zxing_strings.xml"
+                     target-dir="res/values-zh-rCN"/>
+        <source-file src="res/values-zh-rTW/zxing_strings.xml"
+                     target-dir="res/values-zh-rTW"/>
+
+
     </platform>
 </plugin>

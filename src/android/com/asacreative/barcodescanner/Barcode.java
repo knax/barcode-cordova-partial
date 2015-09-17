@@ -64,7 +64,6 @@ public class Barcode extends CordovaPlugin {
             return this.stopCamera(args, callbackContext);
         }
 
-
         return false;
     }
 
