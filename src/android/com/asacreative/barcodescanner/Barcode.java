@@ -223,7 +223,9 @@ public class Barcode extends CordovaPlugin {
             return true;
         }
 
-        callbackContext.sendPluginResult(new PluginResult(PluginResult.Status.OK, barcode));
+        this.camera.setBarcodeCallback(callbackContext);
+
+//        callbackContext.sendPluginResult(new PluginResult(PluginResult.Status.OK, barcode));
 
         return true;
     }

@@ -15,6 +15,8 @@ import com.google.zxing.ResultPoint;
 import com.journeyapps.barcodescanner.BarcodeCallback;
 import com.journeyapps.barcodescanner.BarcodeResult;
 import com.journeyapps.barcodescanner.CompoundBarcodeView;
+import org.apache.cordova.CallbackContext;
+import org.apache.cordova.PluginResult;
 
 import java.util.List;
 
@@ -31,6 +33,8 @@ public class CameraViewfinderFragment extends Fragment {
     private FrameLayout frameContainerLayout;
     private CompoundBarcodeView barcodeView;
 
+    private CallbackContext pluginContext;
+
     public void setDimension(int x, int y, int width, int height) {
         this.x = x;
         this.y = y;
@@ -43,6 +47,7 @@ public class CameraViewfinderFragment extends Fragment {
         public void barcodeResult(BarcodeResult result) {
             if (result.getText() != null) {
                 barcodeView.setStatusText(result.getText());
+                pluginContext.sendPluginResult(new PluginResult(PluginResult.Status.OK, result.getText()));
             }
         }
 
@@ -51,8 +56,8 @@ public class CameraViewfinderFragment extends Fragment {
         }
     };
 
-    public void setBarcodeCallback(BarcodeCallback barcodeCallback) {
-        this.callback = barcodeCallback;
+    public void setBarcodeCallback(CallbackContext barcodeCallback) {
+        this.pluginContext = barcodeCallback;
     }
 
     @TargetApi(Build.VERSION_CODES.HONEYCOMB)
