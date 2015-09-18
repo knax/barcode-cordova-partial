@@ -27,6 +27,8 @@ import android.util.Log;
 import java.io.Closeable;
 import java.io.IOException;
 
+import com.asacreative.pesse.R;
+
 /**
  * Manages beeps and vibrations.
  */

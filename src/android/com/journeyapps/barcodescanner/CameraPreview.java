@@ -15,7 +15,7 @@ import android.view.SurfaceView;
 import android.view.ViewGroup;
 import android.view.WindowManager;
 
-import com.google.zxing.client.android.R;
+import com.asacreative.pesse.R;
 import com.journeyapps.barcodescanner.camera.CameraInstance;
 import com.journeyapps.barcodescanner.camera.CameraSettings;
 import com.journeyapps.barcodescanner.camera.DisplayConfiguration;
@@ -122,6 +122,7 @@ public class CameraPreview extends ViewGroup {
 
         @Override
         public void surfaceChanged(SurfaceHolder holder, int format, int width, int height) {
+            Log.d("CameraPreview", "surface changed");
             if (holder == null) {
                 Log.e(TAG, "*** WARNING *** surfaceChanged() gave us a null surface!");
                 return;
@@ -134,6 +135,8 @@ public class CameraPreview extends ViewGroup {
     private final Handler.Callback stateCallback = new Handler.Callback() {
         @Override
         public boolean handleMessage(Message message) {
+            Log.d("CameraPreview", "the message" + message.toString());
+            Log.d("CameraPreview", "the comparator" + R.id.zxing_prewiew_size_ready);
             if (message.what == R.id.zxing_prewiew_size_ready) {
                 previewSized((Size) message.obj);
                 return true;
@@ -306,6 +309,7 @@ public class CameraPreview extends ViewGroup {
     }
 
     private void previewSized(Size size) {
+        Log.d("CameraPreview", "preview sized");
         this.previewSize = size;
         if (containerSize != null) {
             calculateFrames();
@@ -315,6 +319,11 @@ public class CameraPreview extends ViewGroup {
     }
 
     private void startPreviewIfReady() {
+
+        Log.d("CameraPreview", "start preview if ready");
+//        Log.d("CameraPreview", "currentSurfaceSize" + currentSurfaceSize.toString());
+//        Log.d("CameraPreview", "previewSize" + previewSize.toString());
+//        Log.d("CameraPreview", "surfaceRect" + surfaceRect.toString());
         if (currentSurfaceSize != null && previewSize != null && surfaceRect != null) {
             if (currentSurfaceSize.equals(new Size(surfaceRect.width(), surfaceRect.height()))) {
                 startCameraPreview(surfaceView.getHolder());
@@ -388,6 +397,7 @@ public class CameraPreview extends ViewGroup {
      * Call from UI thread only.
      */
     public void resume() {
+        Log.d("CameraPreview", "on resume");
         // This must be safe to call multiple times
         Util.validateMainThread();
         Log.d(TAG, "resume()");
@@ -453,6 +463,7 @@ public class CameraPreview extends ViewGroup {
     }
 
     private void initCamera() {
+        Log.d("CameraPreview", "init camera");
         if (cameraInstance != null) {
             Log.w(TAG, "initCamera called twice");
             return;
@@ -467,6 +478,7 @@ public class CameraPreview extends ViewGroup {
 
 
     private void startCameraPreview(SurfaceHolder holder) {
+        Log.d("CameraPreview", "Starting preview" + previewActive);
         if (!previewActive) {
             Log.i(TAG, "Starting preview");
             cameraInstance.setSurfaceHolder(holder);

@@ -11,6 +11,12 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.FrameLayout;
 import android.widget.TextView;
+import com.google.zxing.ResultPoint;
+import com.journeyapps.barcodescanner.BarcodeCallback;
+import com.journeyapps.barcodescanner.BarcodeResult;
+import com.journeyapps.barcodescanner.CompoundBarcodeView;
+
+import java.util.List;
 
 @TargetApi(Build.VERSION_CODES.HONEYCOMB)
 public class CameraViewfinderFragment extends Fragment {
@@ -23,6 +29,7 @@ public class CameraViewfinderFragment extends Fragment {
     private int width;
     private int height;
     private FrameLayout frameContainerLayout;
+    private CompoundBarcodeView barcodeView;
 
     public void setDimension(int x, int y, int width, int height) {
         this.x = x;
@@ -30,6 +37,19 @@ public class CameraViewfinderFragment extends Fragment {
         this.width = width;
         this.height = height;
     }
+
+    private BarcodeCallback callback = new BarcodeCallback() {
+        @Override
+        public void barcodeResult(BarcodeResult result) {
+            if (result.getText() != null) {
+                barcodeView.setStatusText(result.getText());
+            }
+        }
+
+        @Override
+        public void possibleResultPoints(List<ResultPoint> resultPoints) {
+        }
+    };
 
     @TargetApi(Build.VERSION_CODES.HONEYCOMB)
     @Override
@@ -46,9 +66,10 @@ public class CameraViewfinderFragment extends Fragment {
 
         frameContainerLayout = (FrameLayout) view.findViewById(getResources().getIdentifier("frame_container", "id", appResourcesPackage));
         frameContainerLayout.setLayoutParams(layoutParams);
-        frameContainerLayout.setBackgroundColor(Color.BLUE);
 
-        TextView textView = (TextView) view.findViewById(getResources().getIdentifier("textView", "id", appResourcesPackage));
+
+        barcodeView = (CompoundBarcodeView) view.findViewById(getResources().getIdentifier("barcode_scanner", "id", appResourcesPackage));
+        barcodeView.decodeContinuous(callback);
 
         return view;
     }
@@ -61,12 +82,17 @@ public class CameraViewfinderFragment extends Fragment {
     @Override
     public void onResume() {
         super.onResume();
+        Log.d("CameraViewfinderFragment", "on resume");
+        barcodeView.resume();
     }
 
     @Override
     public void onPause() {
         super.onPause();
+
+        barcodeView.pause();
     }
+
 
     @Override
     public void onDestroy() {

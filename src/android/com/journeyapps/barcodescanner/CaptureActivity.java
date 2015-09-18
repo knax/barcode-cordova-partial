@@ -4,7 +4,7 @@ import android.app.Activity;
 import android.os.Bundle;
 import android.view.KeyEvent;
 
-import com.google.zxing.client.android.R;
+import com.asacreative.pesse.R;
 
 /**
  *

@@ -25,6 +25,21 @@
             </feature>
         </config-file>
 
+        <config-file target="AndroidManifest.xml" parent="/manifest">
+            <uses-permission android:name="android.permission.CAMERA" />
+            <uses-permission android:name="android.permission.FLASHLIGHT" />
+
+            <!-- Don't require camera, as this requires a rear camera. This allows it to work on the Nexus 7 -->
+            <uses-feature android:name="android.hardware.camera" android:required="false"/>
+            <uses-feature android:name="android.hardware.camera.front" android:required="false"/>
+            <!-- TODO replace above two with next line after Android 4.2 -->
+            <!-- <uses-feature android:name="android.hardware.camera.any"/> -->
+            <uses-feature android:name="android.hardware.camera.autofocus" android:required="false"/>
+            <uses-feature android:name="android.hardware.camera.flash" android:required="false"/>
+            <uses-feature android:name="android.hardware.screen.landscape" android:required="false"/>
+            <uses-feature android:name="android.hardware.wifi" android:required="false"/>
+        </config-file>
+
         <source-file src="libs/core-3.2.1.jar" target-dir="libs"/>
         <source-file src="libs/android-support-v4.jar" target-dir="libs"/>
 
@@ -46,8 +61,6 @@
         <source-file src="src/android/com/google/zxing/client/android/InactivityTimer.java"
                      target-dir="src/com/google/zxing/client/android"/>
         <source-file src="src/android/com/google/zxing/client/android/Intents.java"
-                     target-dir="src/com/google/zxing/client/android"/>
-        <source-file src="src/android/com/google/zxing/client/android/R.java"
                      target-dir="src/com/google/zxing/client/android"/>
         <source-file src="src/android/com/google/zxing/client/android/camera/CameraConfigurationUtils.java"
                      target-dir="src/com/google/zxing/client/android/camera"/>
@@ -111,8 +124,9 @@
                      target-dir="src/com/journeyapps/barcodescanner/camera"/>
 
 
-
         <!--xml layout part-->
+        <source-file src="res/raw/zxing_beep.ogg"
+                     target-dir="res/raw"/>
         <source-file src="res/drawable-hdpi/icon.png"
                      target-dir="res/drawable-hdpi"/>
         <source-file src="res/drawable-hdpi-v4/icon.png"

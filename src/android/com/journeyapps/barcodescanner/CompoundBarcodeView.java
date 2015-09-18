@@ -4,6 +4,7 @@ import android.content.Context;
 import android.content.Intent;
 import android.content.res.TypedArray;
 import android.util.AttributeSet;
+import android.util.Log;
 import android.view.KeyEvent;
 import android.widget.FrameLayout;
 import android.widget.TextView;
@@ -15,7 +16,7 @@ import com.google.zxing.ResultPoint;
 import com.google.zxing.client.android.DecodeFormatManager;
 import com.google.zxing.client.android.DecodeHintManager;
 import com.google.zxing.client.android.Intents;
-import com.google.zxing.client.android.R;
+import com.asacreative.pesse.R;
 import com.journeyapps.barcodescanner.camera.CameraSettings;
 
 import java.util.List;
@@ -170,6 +171,7 @@ public class CompoundBarcodeView extends FrameLayout {
      * @see BarcodeView#resume()
      */
     public void resume() {
+        Log.d("CompoundBarcodeView", "on resume");
         barcodeView.resume();
     }
 

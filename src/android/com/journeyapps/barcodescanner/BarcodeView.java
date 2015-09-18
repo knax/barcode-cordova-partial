@@ -1,13 +1,16 @@
 package com.journeyapps.barcodescanner;
 
+import android.annotation.TargetApi;
 import android.content.Context;
+import android.os.Build;
 import android.os.Handler;
 import android.os.Message;
 import android.util.AttributeSet;
 
+import android.util.Log;
 import com.google.zxing.DecodeHintType;
 import com.google.zxing.ResultPoint;
-import com.google.zxing.client.android.R;
+import com.asacreative.pesse.R;
 
 import java.util.HashMap;
 import java.util.List;
@@ -87,7 +90,9 @@ public class BarcodeView extends CameraPreview {
     }
 
 
+    @TargetApi(Build.VERSION_CODES.CUPCAKE)
     private void initialize() {
+        Log.v("BarcodeView", "Masukk");
         decoderFactory = new DefaultDecoderFactory();
         resultHandler = new Handler(resultCallback);
     }
@@ -172,8 +177,10 @@ public class BarcodeView extends CameraPreview {
 
     private void startDecoderThread() {
         stopDecoderThread(); // To be safe
+        Log.v("BarcodeView", "start decoder thread");
 
         if (decodeMode != DecodeMode.NONE && isPreviewActive()) {
+            Log.v("BarcodeView", "start decoding");
             // We only start the thread if both:
             // 1. decoding was requested
             // 2. the preview is active
