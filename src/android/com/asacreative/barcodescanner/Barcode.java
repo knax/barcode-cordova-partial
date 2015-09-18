@@ -157,19 +157,6 @@ public class Barcode extends CordovaPlugin {
 
         this.camera.startPreview();
 
-        this.camera.setBarcodeCallback(new BarcodeCallback() {
-            @Override
-            public void barcodeResult(BarcodeResult result) {
-                if (result.getText() != null) {
-                    barcode = result.getText();
-                }
-            }
-
-            @Override
-            public void possibleResultPoints(List<ResultPoint> resultPoints) {
-            }
-        });
-
         callbackContext.sendPluginResult(new PluginResult(PluginResult.Status.OK, "Camera successfully started"));
 
         return true;
