@@ -96,6 +96,17 @@
         });
     };
 
+    Barcode.prototype.getBarcode = function () {
+        return new Promise(function (resolve, reject) {
+            console.log("Barcode.js: get barcode");
+            exec(function (result) {
+                resolve(result);
+            }, function (error) {
+                reject(error);
+            }, "Barcode", "getBarcode", []);
+        });
+    };
+
 
     module.exports = new Barcode();
 })();

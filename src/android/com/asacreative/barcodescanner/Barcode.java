@@ -1,5 +1,8 @@
 package com.asacreative.barcodescanner;
 
+import com.google.zxing.ResultPoint;
+import com.journeyapps.barcodescanner.BarcodeCallback;
+import com.journeyapps.barcodescanner.BarcodeResult;
 import org.apache.cordova.CordovaWebView;
 import org.apache.cordova.CallbackContext;
 import org.apache.cordova.CordovaPlugin;
@@ -13,6 +16,8 @@ import org.json.JSONObject;
 import com.asacreative.barcodescanner.Camera;
 import org.apache.cordova.PluginResult;
 
+import java.util.List;
+
 public class Barcode extends CordovaPlugin {
     public static final String TAG = "Barcode";
 
@@ -23,6 +28,9 @@ public class Barcode extends CordovaPlugin {
     final String getCameraObjectMethod = "getCameraObject";
     final String startCameraMethod = "startCamera";
     final String stopCameraMethod = "stopCamera";
+    final String getBarcodeMethod = "getBarcode";
+
+    public String barcode = "";
 
 
     private Camera camera = null;
@@ -62,6 +70,8 @@ public class Barcode extends CordovaPlugin {
             return this.startCamera(args, callbackContext);
         } else if (stopCameraMethod.equals(action)) {
             return this.stopCamera(args, callbackContext);
+        } else if (getBarcodeMethod.equals(action)) {
+            return this.getBarcode(args, callbackContext);
         }
 
         return false;
@@ -147,6 +157,19 @@ public class Barcode extends CordovaPlugin {
 
         this.camera.startPreview();
 
+        this.camera.setBarcodeCallback(new BarcodeCallback() {
+            @Override
+            public void barcodeResult(BarcodeResult result) {
+                if (result.getText() != null) {
+                    barcode = result.getText();
+                }
+            }
+
+            @Override
+            public void possibleResultPoints(List<ResultPoint> resultPoints) {
+            }
+        });
+
         callbackContext.sendPluginResult(new PluginResult(PluginResult.Status.OK, "Camera successfully started"));
 
         return true;
@@ -183,6 +206,24 @@ public class Barcode extends CordovaPlugin {
         }
 
         callbackContext.sendPluginResult(new PluginResult(PluginResult.Status.OK, "Camera object " + this.camera.toString()));
+
+        return true;
+    }
+
+    public boolean getBarcode(JSONArray args, CallbackContext callbackContext) throws JSONException {
+        if (this.camera == null) {
+            callbackContext.sendPluginResult(new PluginResult(PluginResult.Status.ERROR, "Camera must be initialized first"));
+
+            return true;
+        }
+
+        if (!this.camera.isCameraStarted) {
+            callbackContext.sendPluginResult(new PluginResult(PluginResult.Status.ERROR, "Camera is not started"));
+
+            return true;
+        }
+
+        callbackContext.sendPluginResult(new PluginResult(PluginResult.Status.OK, barcode));
 
         return true;
     }

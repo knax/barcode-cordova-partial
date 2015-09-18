@@ -51,6 +51,10 @@ public class CameraViewfinderFragment extends Fragment {
         }
     };
 
+    public void setBarcodeCallback(BarcodeCallback barcodeCallback) {
+        this.callback = barcodeCallback;
+    }
+
     @TargetApi(Build.VERSION_CODES.HONEYCOMB)
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {

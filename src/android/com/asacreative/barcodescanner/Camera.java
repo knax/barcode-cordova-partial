@@ -14,6 +14,7 @@ import android.util.TypedValue;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.FrameLayout;
+import com.journeyapps.barcodescanner.BarcodeCallback;
 import org.apache.cordova.CordovaInterface;
 import org.apache.cordova.CordovaWebView;
 
@@ -122,6 +123,14 @@ public class Camera {
 
     public String toString() {
         return String.format("Camera Viewfinder with x:%d, y:%d, width:%d, height:%d", this.x, this.y, this.width, this.height);
+    }
+
+    public void setBarcodeCallback(BarcodeCallback barcodeCallback){
+        if (cameraFragment == null) {
+            return;
+        }
+
+        this.cameraFragment.setBarcodeCallback(barcodeCallback);
     }
 
 
