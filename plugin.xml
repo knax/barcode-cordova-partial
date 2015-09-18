@@ -127,22 +127,6 @@
         <!--xml layout part-->
         <source-file src="res/raw/zxing_beep.ogg"
                      target-dir="res/raw"/>
-        <source-file src="res/drawable-hdpi/icon.png"
-                     target-dir="res/drawable-hdpi"/>
-        <source-file src="res/drawable-hdpi-v4/icon.png"
-                     target-dir="res/drawable-hdpi-v4"/>
-        <source-file src="res/drawable-mdpi/icon.png"
-                     target-dir="res/drawable-mdpi"/>
-        <source-file src="res/drawable-mdpi-v4/icon.png"
-                     target-dir="res/drawable-mdpi-v4"/>
-        <source-file src="res/drawable-xhdpi/icon.png"
-                     target-dir="res/drawable-xhdpi"/>
-        <source-file src="res/drawable-xhdpi-v4/icon.png"
-                     target-dir="res/drawable-xhdpi-v4"/>
-        <source-file src="res/drawable-xxhdpi/icon.png"
-                     target-dir="res/drawable-xxhdpi"/>
-        <source-file src="res/drawable-xxhdpi-v4/icon.png"
-                     target-dir="res/drawable-xxhdpi-v4"/>
         <source-file src="res/layout/activity_camera.xml"
                      target-dir="res/layout"/>
         <source-file src="res/layout/zxing_barcode_scanner.xml"
